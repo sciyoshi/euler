@@ -1,0 +1,9 @@
+[package]
+name = "euler"
+version = "0.1.0"
+authors = ["Samuel Cormier-Iijima <sciyoshi@gmail.com>"]
+
+[dependencies]
+primal = "*"
+roaring = "*"
+num = "*"
