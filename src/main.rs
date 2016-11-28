@@ -12,10 +12,10 @@ mod problem91;
 mod problem93;
 mod problem94;
 mod problem95;
+mod problem162;
 
 fn main() {
-	println!("Euler #95: {}", problem95::solve());
-
+	println!("Euler #162: {}", problem162::solve());
 	if false {
 		println!("Euler #60: {}", problem60::solve());
 		println!("Euler #75: {}", problem75::solve());
@@ -23,5 +23,6 @@ fn main() {
 		println!("Euler #91: {}", problem91::solve());
 		println!("Euler #93: {}", problem93::solve());
 		println!("Euler #94: {}", problem94::solve());
+		println!("Euler #95: {}", problem95::solve());
 	}
 }
