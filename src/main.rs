@@ -21,7 +21,6 @@ mod problem162;
 mod problem376;
 
 fn main() {
-	println!("Euler #124: {}", problem124::solve());
 	// println!("Euler #376: {}", problem376::solve());
 
 	// completed problems
@@ -35,6 +34,7 @@ fn main() {
 		println!("Euler #95: {}", problem95::solve());
 		println!("Euler #111: {}", problem111::solve());
 		println!("Euler #119: {}", problem119::solve());
+		println!("Euler #124: {}", problem124::solve());
 		println!("Euler #123: {}", problem123::solve());
 		println!("Euler #162: {}", problem162::solve());
 	}
