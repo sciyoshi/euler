@@ -7,3 +7,4 @@ authors = ["Samuel Cormier-Iijima <sciyoshi@gmail.com>"]
 primal = "*"
 roaring = "*"
 num = "*"
+mod_pow = { git = "https://github.com/kunerd/mod_pow" }
