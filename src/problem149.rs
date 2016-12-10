@@ -1,6 +1,7 @@
-use ndarray::Array;
+use ndarray::{Array, Axis};
 use num::Num;
-use std::cmp::Ord;
+use std::ops::Deref;
+use std::cmp::{Ord, max};
 use std::collections::VecDeque;
 
 struct LaggedFib {
@@ -27,20 +28,33 @@ fn lagged_fib() -> LaggedFib {
 	}
 }
 
-fn max_sum<T: IntoIterator>(items: T) -> T::Item where T::Item: Num + Ord {
-	items.into_iter().scan(T::Item::zero(), |state, el| {
-		Some(state)
-	}).max()
+fn max_sum<T: IntoIterator, V: Num + Ord + Copy>(items: T) -> V where T::Item: Deref<Target=V> {
+	items.into_iter().scan(V::zero(), |state, el| {
+		*state = max(V::zero(), *state + *el);
+
+		Some(*state)
+	}).max().unwrap_or(V::zero())
 }
 
 pub fn solve() -> i64 {
-	let arr = Array::from_shape_vec((10, 10), lagged_fib().take(100).collect()).unwrap();
+	let dim = 2_000;
+	let arr = Array::from_shape_vec((dim, dim), lagged_fib().take(dim * dim).collect()).unwrap();
 
-	println!("{:?}", arr);
+	let row_max = arr.axis_iter(Axis(0)).map(max_sum).max().unwrap();
+	let col_max = arr.axis_iter(Axis(1)).map(max_sum).max().unwrap();
 
-	let result = max_sum(arr.slice(s![0..1, ..]));
+	let mut diag1_max = 0;
+	let mut diag2_max = 0;
 
-	println!("{:?}", result);
+	for i in 0..10 {
+		diag1_max = max(diag1_max, max_sum((0...i).zip((0...i).rev()).map(|(i, j)| &arr[[i, j]])));
+		diag2_max = max(diag2_max, max_sum((dim - 1 - i...dim - 1).zip(0...i).map(|(i, j)| &arr[[i, j]])));
+	}
 
-	0
+	for i in 1..10 {
+		diag1_max = max(diag1_max, max_sum((i...dim - 1).zip((i...dim - 1).rev()).map(|(i, j)| &arr[[i, j]])));
+		diag2_max = max(diag2_max, max_sum((0...i).zip(i...dim - 1).map(|(i, j)| &arr[[i, j]])));
+	}
+
+	max(max(row_max, col_max), max(diag1_max, diag2_max))
 }

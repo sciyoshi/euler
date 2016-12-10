@@ -4,9 +4,13 @@ version = "0.1.0"
 authors = ["Samuel Cormier-Iijima <sciyoshi@gmail.com>"]
 
 [dependencies]
+time = "*"
 primal = "*"
 roaring = "*"
 num = "*"
 itertools = "*"
 ndarray = "*"
+bit-vec = "*"
+bit-set = "*"
+prettytable-rs = "*"
 mod_pow = { git = "https://github.com/kunerd/mod_pow" }

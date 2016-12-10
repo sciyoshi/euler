@@ -1,14 +1,19 @@
-#![feature(inclusive_range_syntax, step_by, conservative_impl_trait)]
+#![feature(inclusive_range_syntax, step_by, conservative_impl_trait, ptr_eq)]
 
 #[macro_use]
 extern crate num;
+extern crate time;
 extern crate primal;
 extern crate roaring;
 extern crate mod_pow;
+extern crate bit_vec;
+extern crate bit_set;
 #[macro_use]
 extern crate ndarray;
 #[macro_use]
 extern crate itertools;
+#[macro_use]
+extern crate prettytable;
 
 mod problem60;
 mod problem75;
@@ -27,11 +32,19 @@ mod problem133;
 mod problem145;
 mod problem149;
 mod problem162;
+mod problem167;
+mod problem185;
+mod problem186;
 mod problem376;
 
 fn main() {
-	// println!("Euler #376: {}", problem376::solve());
-	println!("Euler #149: {}", problem149::solve());
+	println!("Euler #186: {}", problem186::solve());
+
+	// problems in progress
+	if false {
+		println!("Euler #167: {}", problem167::solve());
+		println!("Euler #376: {}", problem376::solve());
+	}
 
 	// completed problems
 	if false {
@@ -50,6 +63,8 @@ fn main() {
 		println!("Euler #123: {}", problem123::solve());
 		println!("Euler #133: {}", problem133::solve());
 		println!("Euler #145: {}", problem145::solve());
+		println!("Euler #149: {}", problem149::solve());
 		println!("Euler #162: {}", problem162::solve());
+		println!("Euler #185: {}", problem185::solve());
 	}
 }
