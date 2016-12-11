@@ -15,6 +15,8 @@ extern crate itertools;
 #[macro_use]
 extern crate prettytable;
 
+#[macro_use]
+mod utils;
 mod problem60;
 mod problem75;
 mod problem78;
@@ -35,10 +37,11 @@ mod problem162;
 mod problem167;
 mod problem185;
 mod problem186;
+mod problem305;
 mod problem376;
 
 fn main() {
-	println!("Euler #186: {}", problem186::solve());
+	println!("Euler #305: {}", problem305::solve());
 
 	// problems in progress
 	if false {
@@ -66,5 +69,6 @@ fn main() {
 		println!("Euler #149: {}", problem149::solve());
 		println!("Euler #162: {}", problem162::solve());
 		println!("Euler #185: {}", problem185::solve());
+		println!("Euler #186: {}", problem186::solve());
 	}
 }

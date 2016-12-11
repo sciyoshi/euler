@@ -2,31 +2,6 @@ use ndarray::{Array, Axis};
 use num::Num;
 use std::ops::Deref;
 use std::cmp::{Ord, max};
-use std::collections::VecDeque;
-
-struct LaggedFib {
-	terms: VecDeque<i64>
-}
-
-impl Iterator for LaggedFib {
-	type Item = i64;
-
-	fn next(&mut self) -> Option<i64> {
-		let next = (self.terms[0] + self.terms[31] + 1_000_000) % 1_000_000 - 500_000;
-
-		self.terms.push_back(next);
-
-		self.terms.pop_front()
-	}
-}
-
-fn lagged_fib() -> LaggedFib {
-	LaggedFib {
-		terms: (1i64...55).map(|k| {
-			(100_003 - 200_003 * k + 300_007 * k.pow(3)) % 1_000_000 - 500_000
-		}).collect()
-	}
-}
 
 fn max_sum<T: IntoIterator, V: Num + Ord + Copy>(items: T) -> V where T::Item: Deref<Target=V> {
 	items.into_iter().scan(V::zero(), |state, el| {
@@ -38,7 +13,11 @@ fn max_sum<T: IntoIterator, V: Num + Ord + Copy>(items: T) -> V where T::Item: D
 
 pub fn solve() -> i64 {
 	let dim = 2_000;
-	let arr = Array::from_shape_vec((dim, dim), lagged_fib().take(dim * dim).collect()).unwrap();
+	let lagged_fib = recurrence![55, a[n]: i64 = match n {
+		1...55 => (100_003 - 200_003 * (n as i64) + 300_007 * (n as i64).pow(3)) % 1_000_000 - 500_000,
+		_ => (a[n - 55] + a[n - 24] + 1_000_000) % 1_000_000 - 500_000
+	}];
+	let arr = Array::from_shape_vec((dim, dim), lagged_fib.take(dim * dim).collect()).unwrap();
 
 	let row_max = arr.axis_iter(Axis(0)).map(max_sum).max().unwrap();
 	let col_max = arr.axis_iter(Axis(1)).map(max_sum).max().unwrap();
