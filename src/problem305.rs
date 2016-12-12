@@ -79,7 +79,7 @@ fn count(n: usize, d: usize) -> usize {
 }
 
 fn kth(n: usize, mut k: usize) -> usize {
-	for d in integer_length_10(n).. {
+	for d in 1.. {
 		let c = count(n, d);
 
 		println!("{}: {}", d, c);
@@ -101,7 +101,7 @@ pub fn solve() -> u64 {
 	println!("{}", kth(5, 5));
 	println!("{}", kth(7780, 7780));
 
-	for n in 1..10 {
+	for n in 1..14 {
 		let k = 3.pow(n);
 
 		println!("===> {} = {}", k, kth(k, k));
@@ -109,3 +109,13 @@ pub fn solve() -> u64 {
 
 	0
 }
+
+/*
+37
+169
+2208
+4725
+161013
+926669
+14199388
+ */
