@@ -38,9 +38,13 @@ mod problem167;
 mod problem185;
 mod problem186;
 mod problem305;
+mod problem347;
+mod problem353;
 mod problem376;
 
 fn main() {
+	println!("Euler #353: {}", problem353::solve());
+
 	// problems in progress
 	if false {
 		println!("Euler #167: {}", problem167::solve());
@@ -69,5 +73,6 @@ fn main() {
 		println!("Euler #185: {}", problem185::solve());
 		println!("Euler #186: {}", problem186::solve());
 		println!("Euler #305: {}", problem305::solve());
+		println!("Euler #347: {}", problem347::solve());
 	}
 }
