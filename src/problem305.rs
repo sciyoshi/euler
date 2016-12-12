@@ -1,3 +1,4 @@
+use std::cmp;
 use std::iter;
 use itertools::Itertools;
 use num::{PrimInt, ToPrimitive};
@@ -26,15 +27,28 @@ fn start<T: PrimInt>(n: T) -> T {
 	n * integer_length_10(n) - (pow_10(integer_length_10(n)) - T::one()) / (base - T::one()) + T::one()
 }
 
-fn is_repeat(n: usize, d: usize, k: usize) -> bool {
-	let l = integer_length_10(n);
-	let r = (l + d - 1) / d;
-	let g = (pow_10(d * (r + 1)) - 1) / (pow_10(d) - 1);
-	let f = (pow_10(d * (r + 2)) - (pow_10(d) - 1) * (r + 2) - 1) / ((pow_10(d) - 1) * (pow_10(d) - 1));
+fn is_repeat(mut n: usize, d: usize, k: usize) -> bool {
+	let mut val = (n / pow_10(k)) % pow_10(d);
 
-	let shifted = (n / pow_10(k)) % pow_10(d);
+	if k > 0 && (n % pow_10(k) != (val + 1) / pow_10(d - k)) {
+		return false;
+	}
 
-	integer_length_10(shifted) == d && shifted >= r && (((shifted - r) * g + f) / pow_10(d - k)) % pow_10(l) == n
+	n /= pow_10(k + d);
+	val -= 1;
+
+	while n > 0 {
+		let m = pow_10(cmp::min(d, integer_length_10(n)));
+
+		if n % m != val % m || val < pow_10(d - 1) {
+			return false;
+		}
+
+		n /= pow_10(d);
+		val -= 1;
+	}
+
+	true
 }
 
 fn superstrings(n: usize, d: usize, k: usize) -> Box<Iterator<Item=usize>> {
@@ -78,11 +92,9 @@ fn count(n: usize, d: usize) -> usize {
 	}
 }
 
-fn kth(n: usize, mut k: usize) -> usize {
+fn start_kth(n: usize, mut k: usize) -> usize {
 	for d in 1.. {
 		let c = count(n, d);
-
-		println!("{}: {}", d, c);
 
 		if k > c {
 			k -= c;
@@ -90,7 +102,7 @@ fn kth(n: usize, mut k: usize) -> usize {
 		} else {
 			let result = (0..d).map(|k| superstrings(n, d, k).map(move |v| (v, k))).kmerge().dedup().nth(k - 1).unwrap();
 
-			return start(result.0) + d - result.1;
+			return start(result.0) + d - (integer_length_10(n) + result.1 - 1) % d - 1;
 		}
 	}
 
@@ -98,24 +110,5 @@ fn kth(n: usize, mut k: usize) -> usize {
 }
 
 pub fn solve() -> u64 {
-	println!("{}", kth(5, 5));
-	println!("{}", kth(7780, 7780));
-
-	for n in 1..14 {
-		let k = 3.pow(n);
-
-		println!("===> {} = {}", k, kth(k, k));
-	}
-
-	0
+	(1..14).map(|n| 3.pow(n)).map(|n| start_kth(n, n)).sum::<usize>() as u64
 }
-
-/*
-37
-169
-2208
-4725
-161013
-926669
-14199388
- */
