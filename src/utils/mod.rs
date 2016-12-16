@@ -1,4 +1,5 @@
 pub mod linkedmatrix;
+pub mod numbers;
 
 #[macro_export]
 macro_rules! recurrence {
