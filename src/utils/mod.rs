@@ -1,3 +1,5 @@
+pub mod linkedmatrix;
+
 #[macro_export]
 macro_rules! recurrence {
 	( $len:expr, $name:ident [ $index:ident ] : $ty:ty = $body:expr ) => ({
