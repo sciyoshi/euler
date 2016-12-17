@@ -6,6 +6,7 @@ extern crate time;
 extern crate primal;
 extern crate roaring;
 extern crate mod_pow;
+extern crate mod_exp;
 extern crate bit_vec;
 extern crate bit_set;
 #[macro_use]
@@ -38,6 +39,7 @@ mod problem149;
 mod problem159;
 mod problem162;
 mod problem167;
+mod problem182;
 mod problem185;
 mod problem186;
 mod problem305;
@@ -46,6 +48,8 @@ mod problem353;
 mod problem376;
 
 fn main() {
+	println!("Euler #182: {}", problem182::solve());
+
 	// problems in progress
 	if false {
 		println!("Euler #167: {}", problem167::solve());

@@ -5,6 +5,7 @@ dependencies = [
  "bit-set 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "bit-vec 0.4.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "itertools 0.5.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "mod_exp 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "mod_pow 0.1.0 (git+https://github.com/kunerd/mod_pow)",
  "ndarray 0.7.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "num 0.1.36 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -97,6 +98,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 name = "matrixmultiply"
 version = "0.1.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "mod_exp"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+dependencies = [
+ "num 0.1.36 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "mod_pow"
@@ -306,6 +315,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum lazy_static 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = "6abe0ee2e758cd6bc8a2cd56726359007748fbf4128da998b65d0b70f881e19b"
 "checksum libc 0.2.17 (registry+https://github.com/rust-lang/crates.io-index)" = "044d1360593a78f5c8e5e710beccdc24ab71d1f01bc19a29bcacdba22e8475d8"
 "checksum matrixmultiply 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)" = "38a17dc95fa4f06de342594b225b0822762506c43ca7b58486d778204bd76228"
+"checksum mod_exp 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)" = "fe3458d57d821b3f389edefbfd83237cde9886f010a30a61f7cd19b650ec72a9"
 "checksum mod_pow 0.1.0 (git+https://github.com/kunerd/mod_pow)" = "<none>"
 "checksum ndarray 0.7.1 (registry+https://github.com/rust-lang/crates.io-index)" = "815cf9579e036af6c40226d91e553bea02782c312618aa5ce12df1c040a7f1a0"
 "checksum num 0.1.36 (registry+https://github.com/rust-lang/crates.io-index)" = "bde7c03b09e7c6a301ee81f6ddf66d7a28ec305699e3d3b056d2fc56470e3120"
